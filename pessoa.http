@@ -1,0 +1,39 @@
+@baseUrl = http://localhost:8080/api
+
+### Variáveis
+@pessoaId = 1
+
+### GET - Listar todas as pessoas
+GET {{baseUrl}}/pessoas
+Accept: application/json
+
+### GET - Buscar uma pessoa pelo ID
+GET {{baseUrl}}/pessoas/{{pessoaId}}
+Accept: application/json
+
+### POST - Criar uma nova pessoa
+POST {{baseUrl}}/pessoas
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao.silva@exemplo.com",
+  "cpf": "12345678901",
+  "dataNascimento": "1990-01-01",
+  "telefone": "(11) 98765-4321"
+}
+
+### PUT - Atualizar uma pessoa existente
+PUT {{baseUrl}}/pessoas/{{pessoaId}}
+Content-Type: application/json
+
+{
+  "nome": "João Silva Atualizado",
+  "email": "joao.atualizado@exemplo.com",
+  "cpf": "12345678901",
+  "dataNascimento": "1990-01-01",
+  "telefone": "(11) 99999-8888"
+}
+
+### DELETE - Deletar uma pessoa
+DELETE {{baseUrl}}/pessoas/{{pessoaId}}
