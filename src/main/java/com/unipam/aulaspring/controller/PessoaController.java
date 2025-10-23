@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.unipam.aulaspring.service.PessoaService;
 import com.unipam.aulaspring.model.Pessoa;
 
 @RestController
 @RequestMapping("/api/pessoas")
+@CrossOrigin(origins = "*")
 public class PessoaController {
     private final PessoaService pessoaService;
 
