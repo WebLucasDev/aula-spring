@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+''''import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,6 +39,18 @@ public class PessoaController {
     @PostMapping
     public Pessoa criarPessoa(@RequestBody Pessoa pessoa) {
         return pessoaService.salvarPessoa(pessoa);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable Long id, @RequestBody Pessoa pessoa) {
+        return pessoaService.buscarPorId(id)
+                .map(pessoaExistente -> {
+                    pessoaExistente.setNome(pessoa.getNome());
+                    pessoaExistente.setIdade(pessoa.getIdade());
+                    Pessoa pessoaAtualizada = pessoaService.salvarPessoa(pessoaExistente);
+                    return ResponseEntity.ok(pessoaAtualizada);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
